@@ -5,9 +5,8 @@ import 'package:get/get.dart';
 import 'package:store/controller/onboarding_controller.dart';
 import 'package:store/core/constant/colors.dart';
 import 'package:store/data/datasource/static/static.dart';
-import 'package:store/view/widgets/big_text.dart';
 import 'package:store/view/widgets/elevated_button.dart';
-import 'package:store/view/widgets/small_text.dart';
+import 'package:store/view/widgets/text_button.dart';
 
 class onBoardingScreen extends StatelessWidget {
   const onBoardingScreen({super.key});
@@ -25,9 +24,9 @@ class onBoardingScreen extends StatelessWidget {
               onpageChanged(value) {
                 controller.onPageChanged(value);
               }
+
               return Expanded(
                 flex: 3,
-                
                 child: PageView.builder(
                   controller: controller.pageController,
                   onPageChanged: onpageChanged,
@@ -37,8 +36,11 @@ class onBoardingScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         //Title Text
-                        bigText(text: onBoardingList[index].title!),
-
+                        // bigText(text: onBoardingList[index].title!),
+                        Text(
+                          onBoardingList[index].title!,
+                          style: Theme.of(context).textTheme.headlineLarge,
+                        ),
                         const SizedBox(height: 80),
 
                         // Image
@@ -52,19 +54,21 @@ class onBoardingScreen extends StatelessWidget {
                             width: double.infinity,
                             alignment: Alignment.center,
                             //body text
-                            child: smallText(
-                                text: onBoardingList[index].body!,
-                                textAlign: TextAlign.center,
-                                color: AppColors.bodyTextColor)),
+                            child: Text(
+                              onBoardingList[index].body!,
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.bodySmall,
+                            )),
                       ],
                     );
                   },
                 ),
               );
             }),
-           
+
             const SizedBox(height: 35),
-           
+
+            // Dots and elevatedButton
             GetBuilder<OnBoardingControllerImp>(builder: (controller) {
               return Expanded(
                 child: Column(
@@ -81,24 +85,23 @@ class onBoardingScreen extends StatelessWidget {
                     const SizedBox(
                       height: 35,
                     ),
-                    elevatedButton(
+                    SizedBox(
                       width: 300,
                       height: 45,
-                      onpressed: () {
-                        controller.nextPageview();
-                      },
-                      text:
-                          controller.currentPage == 0 ? "Les's go" : 'Continue',
+                      child: elevatedButton(
+                        radius: 15,
+                        color: AppColors.primaryColor,
+                        onpressed: () {
+                          controller.nextPageview();
+                        },
+                        text: controller.getString(),
+                      ),
                     ),
-                    TextButton(
-                      onPressed: () {
+                    textButton(
+                      onpressed: () {
                         controller.skip();
                       },
-                      child: const Text(
-                        'Skip',
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold),
-                      ),
+                      text: 'Skip',
                     )
                   ],
                 ),

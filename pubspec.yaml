@@ -69,7 +69,7 @@ dependencies:
   badges: ^3.1.2
   #icon
   flutter_svg: ^2.0.7
-  font_awesome_flutter: ^10.5.0
+  font_awesome_flutter: 9.2.0
   fluttericon: ^2.0.0
   dartz: ^0.10.1
   # Google Auth
@@ -79,6 +79,8 @@ dependencies:
   image_pickers: ^2.0.4+2
   #For me
   dots_indicator: ^3.0.0
+  flutter_signin_button: ^2.0.0
+  sign_button: ^2.0.5
 
 dev_dependencies:
   flutter_test:
