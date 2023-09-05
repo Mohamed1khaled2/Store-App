@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:store/controller/login_controller.dart';
+import 'package:store/controller/signin_controller.dart';
 import 'package:store/core/constant/colors.dart';
 import 'package:store/core/constant/images_asset.dart';
 import 'package:store/view/screen/auth/constans.dart';
@@ -14,19 +14,19 @@ class signInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(LoginControllerImp());
+    Get.put(SigninControllerImp());
 
     return Scaffold(
       backgroundColor: Colors.white,
       // Customze appBar
       appBar: appBar(text: 'Log in'),
 
-      
-      body: GetBuilder<LoginControllerImp>(builder: (controller) {
+      body: GetBuilder<SigninControllerImp>(builder: (controller) {
         return ListView(
           children: [
             Form(
-              key: controller.key,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              key: controller.keyform,
               child: Padding(
                 padding: const EdgeInsets.all(15),
                 child: Column(
@@ -40,12 +40,12 @@ class signInScreen extends StatelessWidget {
                     const SizedBox(height: 25),
                     textFormFiledPassword(controller: controller.password),
                     Container(
-                        margin: const EdgeInsets.only(left: 210),
+                        margin: const EdgeInsets.only(left: 200),
                         child: textButton(
                             onpressed: () {
                               controller.forgotPassword();
                             },
-                            text: "Forget Password")),
+                            text: "Forgotten Password ?")),
                     const SizedBox(height: 5),
                     SizedBox(
                       height: 45,
@@ -82,7 +82,8 @@ class signInScreen extends StatelessWidget {
                             onpressed: () {
                               controller.signUp();
                             },
-                            text: "Sgin up")
+                            text: "Sgin up") , 
+                            
                       ],
                     ),
                   ],

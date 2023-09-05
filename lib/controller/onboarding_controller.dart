@@ -12,6 +12,7 @@ abstract class OnboardingController extends GetxController {
 }
 
 class OnBoardingControllerImp extends OnboardingController {
+  
   int currentPage = 0;
   late PageController pageController;
 
@@ -20,7 +21,7 @@ class OnBoardingControllerImp extends OnboardingController {
   nextPageview() {
     currentPage++;
     if (currentPage > onBoardingList.length - 1) {
-      Get.offAllNamed(AppRoute.login);
+      Get.offAllNamed(AppRouteName.login);
     } else {
       pageController.animateToPage(currentPage,
           duration: const Duration(milliseconds: 650), curve: Curves.easeInOut);
@@ -49,14 +50,12 @@ class OnBoardingControllerImp extends OnboardingController {
 
   @override
   getString() {
-    
-      if (currentPage == 0) {
-        return "Let's go";
-      } else if (currentPage == onBoardingList.length - 1) {
-        return "Log in";
-      } else {
-        return "Continue";
-      }
+    if (currentPage == 0) {
+      return "9".tr;
+    } else if (currentPage == onBoardingList.length - 1) {
+      return "12".tr;
+    } else {
+      return "11".tr;
     }
   }
-
+}

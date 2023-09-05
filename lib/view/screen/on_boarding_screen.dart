@@ -36,18 +36,19 @@ class onBoardingScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         //Title Text
-                        // bigText(text: onBoardingList[index].title!),
+                        const SizedBox(height: 5),
                         Text(
                           onBoardingList[index].title!,
-                          style: Theme.of(context).textTheme.headlineLarge,
+                          style: const TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 80),
 
                         // Image
                         Image.asset(onBoardingList[index].image!,
-                            fit: BoxFit.fill, width: 200, height: 230),
+                            fit: BoxFit.fill, height: Get.width / 1.7),
 
-                        const SizedBox(height: 80),
+                        const SizedBox(height: 90),
 
                         // Body Text
                         Container(
@@ -101,7 +102,7 @@ class onBoardingScreen extends StatelessWidget {
                       onpressed: () {
                         controller.skip();
                       },
-                      text: 'Skip',
+                      text: '10'.tr,
                     )
                   ],
                 ),

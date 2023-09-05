@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:store/core/constant/routes_names.dart';
 
-abstract class LoginController extends GetxController {
+abstract class SigninController extends GetxController {
   sighin();
   forgotPassword();
   signUp();
@@ -11,14 +11,14 @@ abstract class LoginController extends GetxController {
   signinWithTwitter();
 }
 
-class LoginControllerImp extends LoginController {
-  late GlobalKey<FormState> key;
+class SigninControllerImp extends SigninController {
+  late GlobalKey<FormState> keyform;
   late TextEditingController email;
   late TextEditingController password;
 
   @override
   void onInit() {
-    key = GlobalKey();
+    keyform = GlobalKey();
     password = TextEditingController();
     email = TextEditingController();
 
@@ -36,12 +36,25 @@ class LoginControllerImp extends LoginController {
 
   @override
   signUp() {
-    Get.toNamed(AppRoute.signup);
+    Get.offNamed(AppRouteName.signup);
   }
 
   @override
-  forgotPassword() {}
+  forgotPassword() {
+    Get.toNamed(AppRouteName.forgottenpasswordscreen);
+  }
 
   @override
-  sighin() {}
+  sighin() {
+    if (keyform.currentState!.validate()) {
+      Get.offAllNamed(AppRouteName.main);
+    }
+  }
+
+  @override
+  void dispose() {
+    password.dispose();
+    email.dispose();
+    super.dispose();
+  }
 }

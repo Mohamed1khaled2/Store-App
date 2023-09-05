@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:store/core/constant/message_texts.dart';
+import 'package:get/get.dart';
+
+String messageEmpty = "You must write your";
 
 TextFormField textformfiled(
     {required String hintname,
@@ -12,6 +14,10 @@ TextFormField textformfiled(
     Widget? icon,
     TextStyle? textStyleHint,
     TextEditingController? controller,
+    bool? filled,
+    Color? colorLabel,
+    Color? colorFilled,
+    double fontsize = 12,
     String label = 'null'}) {
   return TextFormField(
     controller: controller,
@@ -22,6 +28,9 @@ TextFormField textformfiled(
     enableSuggestions: enableSuggestions,
     keyboardType: keyboardtype,
     decoration: InputDecoration(
+        errorStyle: TextStyle(fontSize: fontsize),
+        filled: filled,
+        fillColor: colorFilled,
         floatingLabelBehavior: FloatingLabelBehavior.always,
         contentPadding: const EdgeInsets.symmetric(horizontal: 25),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
@@ -29,31 +38,36 @@ TextFormField textformfiled(
         hintStyle: textStyleHint,
         label: Container(
             margin: const EdgeInsets.symmetric(horizontal: 15),
-            child: Text(label)),
+            child: Text(
+              label,
+              style: TextStyle(color: colorLabel),
+            )),
         suffixIcon: icon),
   );
 }
 
-vildator(String value, int min, String typeValidator) {
-  if (value.isEmpty) {
-    return "$AppMessages.messageEmpty$typeValidator";
-  } else if (value.length < min) {
-    return '$typeValidator Greater than $min';
-  } else {
-    return null;
-  }
-}
-
 TextFormField textFormfiledEmail({
+  Color? colorFilled,
+  bool? filled,
+  Color? colorLabel,
   TextEditingController? controller,
 }) {
   return textformfiled(
     label: "Email",
+    filled: filled,
+    colorLabel: colorLabel,
+    colorFilled: colorFilled,
     keyboardtype: TextInputType.emailAddress,
     hintname: "Enter your email",
     icon: const Icon(Icons.email_rounded),
     validator: (value) {
-      return vildator(value!, 8, 'email');
+      if (value!.isEmpty) {
+        return "$messageEmpty Email";
+      } else if (value.isEmail == false) {
+        return "Example: example@info.com";
+      } else {
+        return null;
+      }
     },
   );
 }
@@ -62,11 +76,18 @@ TextFormField textFormFiledPassword({
   TextEditingController? controller,
   String hintname = "Enter your password",
   String label = 'Password',
+  String typevalidator = "Passsword",
 }) {
   return textformfiled(
     hintname: hintname,
     validator: (value) {
-      return vildator(value!, 8, 'password');
+      if (value!.isEmpty) {
+        return "$messageEmpty $typevalidator";
+      } else if (value.length <= 8) {
+        return "You must your Password greater than eight";
+      } else {
+        return null;
+      }
     },
     controller: controller,
     label: label,
@@ -76,15 +97,25 @@ TextFormField textFormFiledPassword({
     enableSuggestions: false,
   );
 }
-TextFormField textFormFieldNormaill({
-  required String hintname , 
-  required String label , 
-  TextEditingController? controller 
-}){
+
+TextFormField textFormFieldNormaill(
+    {required String hintname,
+    required String label,
+    String? typevalidator,
+    TextEditingController? controller}) {
   return textformfiled(
-    controller: controller,
-    hintname: hintname, 
-    textStyleHint: const TextStyle(fontSize: 13) , 
-    label: label
-  );
+      controller: controller,
+      fontsize: 13,
+      hintname: hintname,
+      textStyleHint: const TextStyle(fontSize: 13),
+      validator: (value) {
+        if (value!.isEmpty) {
+          return "$typevalidator?!";
+        } else if (!GetUtils.isUsername(value)) {
+          return "Not valid $typevalidator";
+        } else {
+          return null;
+        }
+      },
+      label: label);
 }

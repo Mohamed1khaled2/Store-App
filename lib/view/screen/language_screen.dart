@@ -27,7 +27,7 @@ class languageScreen extends GetView<LocalContrller> {
                 text: "Ar",
                 onpressed: () {
                   controller.changeLang("ar");
-                  Get.offAllNamed(AppRoute.onboarding);
+                  Get.offAllNamed(AppRouteName.onboarding);
                 },
                 color: AppColors.primaryColor),
             const SizedBox(height: 25),
@@ -36,7 +36,7 @@ class languageScreen extends GetView<LocalContrller> {
                 text: "En",
                 onpressed: () {
                   controller.changeLang("en");
-                  Get.offAllNamed(AppRoute.onboarding);
+                  Get.offAllNamed(AppRouteName.onboarding);
                 },
                 color: AppColors.primaryColor),
           ],

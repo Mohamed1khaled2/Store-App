@@ -7,6 +7,7 @@ abstract class SignupController extends GetxController {
   signinWithGoogle();
   signinWithFacebook();
   signinWithTwitter();
+  alreadyihaveAccount();
 }
 
 class SignupControllerImp extends SignupController {
@@ -29,7 +30,11 @@ class SignupControllerImp extends SignupController {
 
   @override
   signUp() {
-    Get.toNamed(AppRoute.signup);
+    if (key.currentState!.validate()) {
+      Get.offAndToNamed(AppRouteName.verfication);
+    } else {
+      // ('Vaild');print
+    }
   }
 
   @override
@@ -39,7 +44,19 @@ class SignupControllerImp extends SignupController {
   signinWithFacebook() {}
 
   @override
-  signinWithTwitter() {
-    throw UnimplementedError();
+  signinWithTwitter() {}
+  @override
+  void dispose() {
+    fname.dispose();
+    email.dispose();
+    lname.dispose();
+    repassword.dispose();
+    password.dispose();
+    super.dispose();
+  }
+
+  @override
+  alreadyihaveAccount() {
+    Get.offNamed(AppRouteName.login);
   }
 }
