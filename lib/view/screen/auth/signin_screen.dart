@@ -19,7 +19,7 @@ class signInScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       // Customze appBar
-      appBar: appBar(text: 'Log in'),
+      appBar: appBar(text: "12".tr),
 
       body: GetBuilder<SigninControllerImp>(builder: (controller) {
         return ListView(
@@ -38,14 +38,20 @@ class signInScreen extends StatelessWidget {
                     const SizedBox(height: 8),
                     textFormfiledEmail(controller: controller.email),
                     const SizedBox(height: 25),
-                    textFormFiledPassword(controller: controller.password),
+                    textFormFiledPassword(
+                      obscurebool: controller.isShowPassword,
+                      ontapIconpassword: () {
+                        controller.showpassowrd();
+                      },
+                      controller: controller.password,
+                    ),
                     Container(
                         margin: const EdgeInsets.only(left: 200),
                         child: textButton(
                             onpressed: () {
                               controller.forgotPassword();
                             },
-                            text: "Forgotten Password ?")),
+                            text: "13".tr)),
                     const SizedBox(height: 5),
                     SizedBox(
                       height: 45,
@@ -53,7 +59,7 @@ class signInScreen extends StatelessWidget {
                       child: elevatedButton(
                         radius: 25,
                         color: AppColors.primaryColor,
-                        text: "Sign in",
+                        text: "14".tr,
                         onpressed: () async {
                           await controller.sighin();
                         },
@@ -66,15 +72,15 @@ class signInScreen extends StatelessWidget {
                     }, onpressedFacebook: () {
                       controller.signinWithFacebook();
                     }, onpressedgoogle: () {
-                      controller.signinWithGoogle();
+                      controller.signinWithGoogles();
                     }),
                     const SizedBox(height: 5),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text(
-                          "Don't have an account ?",
-                          style: TextStyle(
+                        Text(
+                          "15".tr,
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -82,8 +88,7 @@ class signInScreen extends StatelessWidget {
                             onpressed: () {
                               controller.signUp();
                             },
-                            text: "Sgin up") , 
-                            
+                            text: "16".tr),
                       ],
                     ),
                   ],

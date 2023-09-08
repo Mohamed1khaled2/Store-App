@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:store/core/constant/routes_names.dart';
+import 'package:store/core/services/services.dart';
 import 'package:store/data/datasource/static/static.dart';
 
 // onBoarding Controller
@@ -12,15 +13,18 @@ abstract class OnboardingController extends GetxController {
 }
 
 class OnBoardingControllerImp extends OnboardingController {
-  
   int currentPage = 0;
   late PageController pageController;
+  MyServices myServices = Get.find();
 
   //NextToPage
   @override
   nextPageview() {
     currentPage++;
     if (currentPage > onBoardingList.length - 1) {
+      myServices.sharedPreferences.setString("isNewUser", "yes");
+      String? Check = myServices.sharedPreferences.getString("isNewUser");
+      print("$Check form on boardingScreen");
       Get.offAllNamed(AppRouteName.login);
     } else {
       pageController.animateToPage(currentPage,

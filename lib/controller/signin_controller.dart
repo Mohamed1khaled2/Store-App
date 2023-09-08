@@ -1,12 +1,13 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:store/core/constant/routes_names.dart';
+import 'package:store/core/services/firebase_services.dart';
 
 abstract class SigninController extends GetxController {
   sighin();
   forgotPassword();
   signUp();
-  signinWithGoogle();
+  signinWithGoogles();
   signinWithFacebook();
   signinWithTwitter();
 }
@@ -26,7 +27,16 @@ class SigninControllerImp extends SigninController {
   }
 
   @override
-  signinWithGoogle() {}
+  signinWithGoogles() async {
+    await AuthController.instance.signInWithGoogle();
+  }
+
+  bool isShowPassword = true;
+
+  showpassowrd() {
+    isShowPassword = isShowPassword == true ? false : true;
+    update();
+  }
 
   @override
   signinWithFacebook() {}
@@ -45,9 +55,9 @@ class SigninControllerImp extends SigninController {
   }
 
   @override
-  sighin() {
+  sighin() async {
     if (keyform.currentState!.validate()) {
-      Get.offAllNamed(AppRouteName.main);
+      AuthController.instance.login(email.text.trim(), password.text.trim());
     }
   }
 

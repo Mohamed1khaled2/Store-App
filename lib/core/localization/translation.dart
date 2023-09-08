@@ -17,7 +17,11 @@ class Mytranslation extends Translations {
           "9": "هيا بنا",
           "10": "تخطي",
           "11": "استمر",
-          "12": "تسحيل دخول"
+          "12": "تسحيل دخول",
+          "13": "نسيت كلمة المرور",
+          "14": "تسجيل دخول",
+          "15": "ليس لدي حساب",
+          "16": "تسجيل",
         },
         'en': {
           "1": "Choose Product",
@@ -35,7 +39,11 @@ class Mytranslation extends Translations {
           "9": "Let's go",
           "10": "Skip",
           "11": "Continue",
-          "12": "Log in"
+          "12": "Log in",
+          "13": "Forgotten Password",
+          "14": "Sign in",
+          "15": "Don't have account ?",
+          "16": "Sign up"
         }
       };
 }

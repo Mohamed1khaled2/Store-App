@@ -7,101 +7,99 @@ import 'package:store/view/widgets/elevated_button.dart';
 import 'package:store/view/widgets/text_button.dart';
 import 'package:store/view/widgets/text_from_field.dart';
 
-// ignore: camel_case_types
-class signUpScreen extends StatelessWidget {
-  const signUpScreen({super.key});
+class signupScreen extends StatelessWidget {
+  const signupScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     Get.put(SignupControllerImp());
     return Scaffold(
+      appBar: appBar(text: "Sign up"),
       backgroundColor: Colors.white,
-      appBar: appBar(text: 'Sign Up'),
-      body: GetBuilder<SignupControllerImp>(builder: (controller) {
-        return ListView(padding: const EdgeInsets.all(12), children: [
-          Form(
-            autovalidateMode: AutovalidateMode.always,
-            key: controller.key,
-            child: Column(
-              children: [
-                // Image
-                Image.asset(
-                  AppImagesAsset.signup,
-                  height: 260,
-                ),
+      body: ListView(
+        padding: const EdgeInsets.all(8),
+        children: [
+          Image.asset(
+            AppImagesAsset.signup,
+            height: 260,
+          ),
+          // const SizedBox(height: 15),
+          GetBuilder<SignupControllerImp>(builder: (controller) {
+            return Form(
+              key: controller.key,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      textfilednormail(
+                          labelText: "First Name",
+                          textEditingController: controller.fname,
+                          hintText: "Enter first name",
+                          typetext: "First name"),
+                      textfilednormail(
+                          labelText: "Last Name",
+                          textEditingController: controller.lname,
+                          hintText: "Enter last name",
+                          typetext: "Last name")
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  // email filed
+                  textFormfiledEmail(controller: controller.email),
 
-                // fName , lName
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(
-                        width: 180,
-                        // height: 65,
-                        child: textFormFieldNormaill(
-                            controller: controller.fname,
-                            hintname: "Enter your first name",
-                            label: "First Name",
-                            typevalidator: 'First name')),
-                    SizedBox(
-                        width: 180,
-                        // height: 70,
-                        child: textFormFieldNormaill(
-                            controller: controller.lname,
-                            hintname: "Enter your last name",
-                            label: "Last Name",
-                            typevalidator: 'Last Name'))
-                  ],
-                ),
+                  const SizedBox(height: 15),
 
-                const SizedBox(height: 10),
-                // email filed
-                textFormfiledEmail(controller: controller.email),
+                  // password filed
+                  textFormFiledPassword(
+                    controller: controller.password,
+                  ),
 
-                const SizedBox(height: 15),
+                  const SizedBox(height: 15),
 
-                // password filed
-                textFormFiledPassword(controller: controller.password),
-
-                const SizedBox(height: 15),
-
-                // re password filed
-                textFormFiledPassword(
+                  // re password filed
+                  textFormFiledPassword(
                     hintname: "Enter your re-password",
-                    label: "re-password",
+                    label: "Re-Password",
+                    obscurebool: controller.isShowPassword,
                     controller: controller.repassword,
-                    typevalidator: "Re-Password"),
-                const SizedBox(height: 25),
-                //Elevated button SignUp
-                SizedBox(
-                    height: 45,
-                    width: 255,
-                    child: elevatedButton(
-                        text: "Sign Up",
-                        radius: 25,
-                        onpressed: () {
-                          controller.signUp();
-                        })),
-                const SizedBox(height: 5),
-
-                // Social Media Auth
-                socialmediaSignInAndSignup(onpressedTwiiter: () {
-                  controller.signinWithTwitter();
-                }, onpressedFacebook: () {
-                  controller.signinWithFacebook();
-                }, onpressedgoogle: () {
-                  controller.signinWithGoogle();
-                }),
-
-                textButton(
-                    onpressed: () {
-                      controller.alreadyihaveAccount();
+                    ontapIconpassword: () {
+                      controller.showpassowrd();
                     },
-                    text: "Already i have account")
-              ],
-            ),
-          )
-        ]);
-      }),
+                    typevalidator: "Re-Password",
+                  ),
+                  // Elevated button SignUp
+                  const SizedBox(height: 15),
+                  SizedBox(
+                      height: 45,
+                      width: 255,
+                      child: elevatedButton(
+                          text: "Sign Up",
+                          radius: 25,
+                          onpressed: () async {
+                            await controller.signUp();
+                          })),
+                  const SizedBox(height: 5),
+                  // Social Media Auth
+                  socialmediaSignInAndSignup(onpressedTwiiter: () {
+                    controller.signinWithTwitter();
+                  }, onpressedFacebook: () {
+                    controller.signinWithFacebook();
+                  }, onpressedgoogle: () {
+                    controller.signinWithGoogle();
+                  }),
+                  textButton(
+                      onpressed: () {
+                        controller.alreadyihaveAccount();
+                      },
+                      text: "I already have account")
+                ],
+              ),
+            );
+          })
+        ],
+      ),
     );
   }
 }

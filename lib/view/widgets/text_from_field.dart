@@ -10,10 +10,11 @@ TextFormField textformfiled(
     String chr = '*',
     bool autocorrect = false,
     bool enableSuggestions = true,
-    bool obscuretext = false,
+    bool obscurebool = false,
     Widget? icon,
     TextStyle? textStyleHint,
     TextEditingController? controller,
+    Function()? ontapIconpassword,
     bool? filled,
     Color? colorLabel,
     Color? colorFilled,
@@ -22,7 +23,7 @@ TextFormField textformfiled(
   return TextFormField(
     controller: controller,
     validator: validator,
-    obscureText: obscuretext,
+    obscureText: obscurebool,
     obscuringCharacter: chr,
     autocorrect: autocorrect,
     enableSuggestions: enableSuggestions,
@@ -42,7 +43,10 @@ TextFormField textformfiled(
               label,
               style: TextStyle(color: colorLabel),
             )),
-        suffixIcon: icon),
+        suffixIcon: GestureDetector(
+          onTap: ontapIconpassword,
+          child: icon,
+        )),
   );
 }
 
@@ -54,6 +58,7 @@ TextFormField textFormfiledEmail({
 }) {
   return textformfiled(
     label: "Email",
+    controller: controller,
     filled: filled,
     colorLabel: colorLabel,
     colorFilled: colorFilled,
@@ -65,57 +70,71 @@ TextFormField textFormfiledEmail({
         return "$messageEmpty Email";
       } else if (value.isEmail == false) {
         return "Example: example@info.com";
-      } else {
-        return null;
-      }
+      } else {}
     },
   );
 }
 
-TextFormField textFormFiledPassword({
-  TextEditingController? controller,
-  String hintname = "Enter your password",
-  String label = 'Password',
-  String typevalidator = "Passsword",
-}) {
-  return textformfiled(
-    hintname: hintname,
-    validator: (value) {
-      if (value!.isEmpty) {
-        return "$messageEmpty $typevalidator";
-      } else if (value.length <= 8) {
-        return "You must your Password greater than eight";
-      } else {
-        return null;
-      }
-    },
-    controller: controller,
-    label: label,
-    icon: const Icon(Icons.password_rounded),
-    obscuretext: true,
-    chr: '*',
-    enableSuggestions: false,
-  );
-}
 
-TextFormField textFormFieldNormaill(
-    {required String hintname,
-    required String label,
-    String? typevalidator,
-    TextEditingController? controller}) {
+
+TextFormField textFormFiledPassword(
+    {TextEditingController? controller,
+    bool obscurebool = false,
+    String hintname = "Enter your password",
+    String label = 'Password',
+    String typevalidator = "Passsword",
+    Function()? ontapIconpassword}) {
   return textformfiled(
-      controller: controller,
-      fontsize: 13,
       hintname: hintname,
-      textStyleHint: const TextStyle(fontSize: 13),
       validator: (value) {
         if (value!.isEmpty) {
-          return "$typevalidator?!";
-        } else if (!GetUtils.isUsername(value)) {
-          return "Not valid $typevalidator";
-        } else {
-          return null;
-        }
+          return "$messageEmpty $typevalidator";
+        } else if (value.length <= 8) {
+          return "You must your Password greater than eight";
+        } else {}
       },
-      label: label);
+      controller: controller,
+      label: label,
+      icon: const Icon(Icons.password_rounded),
+      obscurebool: obscurebool,
+      chr: '*',
+      enableSuggestions: false,
+      ontapIconpassword: ontapIconpassword);
+}
+
+Container textfilednormail(
+    {String? hintText,
+    double width = 180,
+    double height = 60,
+    required labelText,
+    String? typetext,
+    required TextEditingController textEditingController}) {
+  return Container(
+    width: width,
+    height: height,
+
+    // color: Colors.black,
+    child: Center(
+      child: TextFormField(
+        controller: textEditingController,
+        validator: (value) {
+          if (value!.isEmpty) {
+            return "$typetext?!";
+          }
+        },
+        decoration: InputDecoration(
+          errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(25),
+              borderSide: const BorderSide(color: Colors.red)),
+          errorStyle:
+              width == 180 ? const TextStyle(fontSize: 13) : const TextStyle(),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
+          hintText: hintText,
+          label: Text(labelText),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 25),
+          floatingLabelBehavior: FloatingLabelBehavior.always,
+        ),
+      ),
+    ),
+  );
 }
