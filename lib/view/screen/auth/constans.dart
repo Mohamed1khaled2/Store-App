@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:sign_button/sign_button.dart';
 
 Container socialmediaSignInAndSignup(
-    {required void Function()? onpressedTwiiter,
-    required void Function()? onpressedgoogle,
-    required void Function()? onpressedFacebook}) {
+    {
+      //required void Function()? onpressedTwiiter,
+    // required void Function()? onpressedFacebook
+      required void Function()? onpressedgoogle,
+
+    }) {
   return Container(
     padding: const EdgeInsets.all(15),
     alignment: Alignment.center,
@@ -16,14 +19,14 @@ Container socialmediaSignInAndSignup(
           buttonType: ButtonType.google,
           onPressed: onpressedgoogle,
         ),
-        SignInButton.mini(
-          buttonType: ButtonType.facebook,
-          onPressed: onpressedFacebook,
-        ),
-        SignInButton.mini(
-          buttonType: ButtonType.twitterX,
-          onPressed: onpressedTwiiter,
-        ),
+        // SignInButton.mini(
+        //   buttonType: ButtonType.facebook,
+        //   onPressed: onpressedFacebook,
+        // ),
+        // SignInButton.mini(
+        //   buttonType: ButtonType.twitterX,
+        //   onPressed: onpressedTwiiter,
+        // ),
       ],
     ),
   );

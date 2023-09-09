@@ -17,13 +17,12 @@ class signupScreen extends StatelessWidget {
       appBar: appBar(text: "Sign up"),
       backgroundColor: Colors.white,
       body: ListView(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(12),
         children: [
           Image.asset(
             AppImagesAsset.signup,
             height: 260,
           ),
-          // const SizedBox(height: 15),
           GetBuilder<SignupControllerImp>(builder: (controller) {
             return Form(
               key: controller.key,
@@ -45,7 +44,7 @@ class signupScreen extends StatelessWidget {
                           typetext: "Last name")
                     ],
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 15),
                   // email filed
                   textFormfiledEmail(controller: controller.email),
 
@@ -53,8 +52,11 @@ class signupScreen extends StatelessWidget {
 
                   // password filed
                   textFormFiledPassword(
-                    controller: controller.password,
-                  ),
+                      controller: controller.password,
+                      obscurebool: controller.isShowPassword,
+                      ontapIconpassword: () {
+                        controller.showpassowrd();
+                      }),
 
                   const SizedBox(height: 15),
 
@@ -82,11 +84,7 @@ class signupScreen extends StatelessWidget {
                           })),
                   const SizedBox(height: 5),
                   // Social Media Auth
-                  socialmediaSignInAndSignup(onpressedTwiiter: () {
-                    controller.signinWithTwitter();
-                  }, onpressedFacebook: () {
-                    controller.signinWithFacebook();
-                  }, onpressedgoogle: () {
+                  socialmediaSignInAndSignup(onpressedgoogle: () {
                     controller.signinWithGoogle();
                   }),
                   textButton(

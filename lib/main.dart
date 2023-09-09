@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:store/core/constant/routes_names.dart';
 import 'package:store/core/localization/change_local.dart';
@@ -11,10 +12,13 @@ import 'package:store/routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Future.delayed(Duration(seconds: 3) , (){
+    FlutterNativeSplash.remove();
+  });
+  await initialServices();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   ).then((value) => Get.put(AuthController()));
-  await initialServices();
   runApp(const MyApp());
 }
 
@@ -25,7 +29,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     LocalContrller contrller = Get.put(LocalContrller());
-
     return GetMaterialApp(
       locale: contrller.language,
       debugShowCheckedModeBanner: false,

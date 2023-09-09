@@ -8,9 +8,13 @@ import 'package:store/view/widgets/snack_bar.dart';
 
 abstract class SignupController extends GetxController {
   signUp();
+
   signinWithGoogle();
+
   signinWithFacebook();
+
   signinWithTwitter();
+
   alreadyihaveAccount();
 }
 
@@ -38,11 +42,14 @@ class SignupControllerImp extends SignupController {
   signUp() async {
     if (key.currentState!.validate()) {
       if (repassword.text == password.text) {
-        AuthController.instance
-            .register(email.text, password.text.trim(), fname.text.trim());
+        AuthController.instance.register(
+            email: email.text,
+            password: password.text.trim(),
+            fname: fname.text.trim());
       } else {
-        Get.showSnackbar(
-            getsnackbarwrong(messagetext: "re-password Not equal password"));
+        Get.showSnackbar(messageWrongSnackBar(
+          messageText: "Re-password not equal password",
+        ));
       }
     }
   }
@@ -55,13 +62,16 @@ class SignupControllerImp extends SignupController {
   }
 
   @override
-  signinWithGoogle() {}
+  signinWithGoogle() async {
+    await AuthController.instance.signInWithGoogle();
+  }
 
   @override
   signinWithFacebook() {}
 
   @override
   signinWithTwitter() {}
+
   @override
   void dispose() {
     fname.dispose();

@@ -24,7 +24,7 @@ class _ForgottenPasswordScreenState extends State<ForgottenPasswordScreen> {
       body: Center(
         child: GetBuilder<ForgottenPasswordImp>(builder: (controller) {
           return Padding(
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.all(25),
             child: Card(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25)),
@@ -54,27 +54,24 @@ class _ForgottenPasswordScreenState extends State<ForgottenPasswordScreen> {
                             .bodyMedium!
                             .copyWith(color: Colors.white),
                       ),
-                      const SizedBox(
-                        height: 25,
-                      ),
+                      const SizedBox(height: 25),
                       Form(
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         key: controller.key,
                         child: textFormfiledEmail(
+                          controller: controller.email,
                           filled: true,
                           colorFilled: Colors.white,
                         ),
                       ),
-                      const SizedBox(
-                        height: 35,
-                      ),
+                      const SizedBox(height: 35),
                       elevatedButton(
                         text: "Screch",
                         radius: 25,
                         onpressed: () {
-                          controller.scerch();
+                          controller.search();
                         },
-                      )
+                      ),
                     ],
                   ),
                 ),

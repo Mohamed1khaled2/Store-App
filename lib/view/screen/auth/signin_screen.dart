@@ -41,7 +41,7 @@ class signInScreen extends StatelessWidget {
                     textFormFiledPassword(
                       obscurebool: controller.isShowPassword,
                       ontapIconpassword: () {
-                        controller.showpassowrd();
+                        controller.showpassword();
                       },
                       controller: controller.password,
                     ),
@@ -67,13 +67,9 @@ class signInScreen extends StatelessWidget {
                     ),
                     //
 
-                    socialmediaSignInAndSignup(onpressedTwiiter: () {
-                      controller.signinWithTwitter();
-                    }, onpressedFacebook: () {
-                      controller.signinWithFacebook();
-                    }, onpressedgoogle: () {
-                      controller.signinWithGoogles();
-                    }),
+                    socialmediaSignInAndSignup(onpressedgoogle: (){
+                      controller.signinWithGoogle();
+                    }) ,
                     const SizedBox(height: 5),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,

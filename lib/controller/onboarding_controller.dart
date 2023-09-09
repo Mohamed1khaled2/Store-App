@@ -7,8 +7,11 @@ import 'package:store/data/datasource/static/static.dart';
 // onBoarding Controller
 abstract class OnboardingController extends GetxController {
   nextPageview();
+
   onPageChanged(int index);
+
   skip();
+
   getString();
 }
 
@@ -19,16 +22,22 @@ class OnBoardingControllerImp extends OnboardingController {
 
   //NextToPage
   @override
-  nextPageview() {
+  nextPageview() async {
     currentPage++;
-    if (currentPage > onBoardingList.length - 1) {
-      myServices.sharedPreferences.setString("isNewUser", "yes");
-      String? Check = myServices.sharedPreferences.getString("isNewUser");
-      print("$Check form on boardingScreen");
-      Get.offAllNamed(AppRouteName.login);
-    } else {
+
+    
+    if (currentPage < onBoardingList.length ) {
       pageController.animateToPage(currentPage,
           duration: const Duration(milliseconds: 650), curve: Curves.easeInOut);
+    } else {
+
+      // will save String is new user after finish all on boarding Screen
+      myServices.sharedPreferences.setString("isNewUser", "yes");
+
+    
+      await Future.delayed(const Duration(seconds: 1), () {
+        Get.offAllNamed(AppRouteName.login);
+      });
     }
   }
 

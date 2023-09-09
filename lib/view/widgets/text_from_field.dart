@@ -71,11 +71,10 @@ TextFormField textFormfiledEmail({
       } else if (value.isEmail == false) {
         return "Example: example@info.com";
       } else {}
+      return null;
     },
   );
 }
-
-
 
 TextFormField textFormFiledPassword(
     {TextEditingController? controller,
@@ -92,6 +91,7 @@ TextFormField textFormFiledPassword(
         } else if (value.length <= 8) {
           return "You must your Password greater than eight";
         } else {}
+        return null;
       },
       controller: controller,
       label: label,
@@ -105,11 +105,12 @@ TextFormField textFormFiledPassword(
 Container textfilednormail(
     {String? hintText,
     double width = 180,
-    double height = 60,
+    double height = 90,
     required labelText,
     String? typetext,
     required TextEditingController textEditingController}) {
   return Container(
+    padding: EdgeInsets.all(0),
     width: width,
     height: height,
 
@@ -121,13 +122,15 @@ Container textfilednormail(
           if (value!.isEmpty) {
             return "$typetext?!";
           }
+          return null;
         },
         decoration: InputDecoration(
           errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(25),
               borderSide: const BorderSide(color: Colors.red)),
-          errorStyle:
-              width == 180 ? const TextStyle(fontSize: 13) : const TextStyle(),
+          errorStyle: width == 180
+              ? const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)
+              : const TextStyle(),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(25)),
           hintText: hintText,
           label: Text(labelText),

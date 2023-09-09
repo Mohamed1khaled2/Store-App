@@ -16,7 +16,6 @@ ThemeData themeEnglish = ThemeData(
       ),
     ));
 ThemeData themeArabic =
-
  // You must chnage font 
  ThemeData(
     colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),

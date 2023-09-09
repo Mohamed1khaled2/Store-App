@@ -6,6 +6,7 @@ import 'package:store/view/screen/auth/reset_password_screen.dart';
 import 'package:store/view/screen/auth/signin_screen.dart';
 import 'package:store/view/screen/auth/signup_screen.dart';
 import 'package:store/view/screen/auth/verfication_screen.dart';
+import 'package:store/view/screen/main_screen.dart';
 import 'package:store/view/screen/on_boarding_screen.dart';
 
 class AppRoutes {
@@ -13,19 +14,23 @@ class AppRoutes {
     GetPage(
         name: AppRouteName.onboarding,
         page: () => const onBoardingScreen(),
-        middlewares: [MiddleWare()]),
+        middlewares: [MiddleWare()]
+    ),
     GetPage(
-        name: AppRouteName.login,
-        page: () => const signInScreen(),
-        transition: Transition.leftToRight),
+      name: AppRouteName.login,
+      page: () => const signInScreen(),
+      transition: Transition.leftToRight,
+    ),
     GetPage(name: AppRouteName.signup, page: () => const signupScreen()),
     GetPage(
         name: AppRouteName.resetpassword,
         page: () => const ResetPasswordScreen()),
-    GetPage(name: AppRouteName.verfication, page: () => const Verfication()),
+    GetPage(
+        name: AppRouteName.verfication, page: () => const VerficationScreen()),
     GetPage(
         name: AppRouteName.forgottenpasswordscreen,
         page: () => const ForgottenPasswordScreen(),
         transition: Transition.rightToLeft),
+    GetPage(name: AppRouteName.main, page: () => const MainScreen())
   ];
 }
